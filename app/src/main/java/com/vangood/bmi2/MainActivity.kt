@@ -7,7 +7,8 @@ import android.view.View
 import com.vangood.bmi2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    val check = Check()
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -15,9 +16,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun bmi(view: View){
-        println("hahaha")
         var weight = binding.edWeight.text.toString().toFloat()
         var height = binding.edHeight.text.toString().toFloat()
-        println(weight/(height*height))
+        binding.tvResult.text = ("Your Bmi : ${weight/(height*height)} , ${check.checkRange(weight/(height*height))}")
+
     }
 }
