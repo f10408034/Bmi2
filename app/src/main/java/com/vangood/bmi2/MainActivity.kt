@@ -2,8 +2,10 @@ package com.vangood.bmi2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.vangood.bmi2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,12 +15,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.bHelp.setOnClickListener {
+            Log.d("MainActivity", "OnClick Help")
+        }
     }
 
     fun bmi(view: View){
+        Log.d("MainActivity","clicked")
         var weight = binding.edWeight.text.toString().toFloat()
         var height = binding.edHeight.text.toString().toFloat()
-        binding.tvResult.text = ("Your Bmi : ${weight/(height*height)} , ${check.checkRange(weight/(height*height))}")
-
+        var bmi = weight/(height*height)
+        Log.d("MainActivity", bmi.toString())
+        Toast.makeText(this, "Your BMI$bmi", Toast.LENGTH_LONG).show()
+//        val builder = AlertDialog.Builder(this)
+//        builder.setTitle("Hello")
+//        builder.setMessage("Your BMI is $bmi")
+//        builder.setPositiveButton("OK", null)
+//        val dialog = builder.create()
+//        dialog.show()
+        AlertDialog.Builder(this)
+            .setTitle("Hello")
+            .setMessage("Your BMI is $bmi")
+            .setPositiveButton("OK",null)
+//            .show()
+        binding.tvResult.text = ("Your Bmi : ${bmi} , ${check.checkRange(bmi)}")
     }
 }
