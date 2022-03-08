@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Bmi2</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="calculate_bmi">CALCULATE BMI</string>
+    <string name="help">help</string>
+    <string name="your_range">Your Range</string>
+    <string name="under">UNDER</string>
+    <string name="normal">NORMAL</string>
+    <string name="over">OVER</string>
 </resources>

@@ -25,7 +25,14 @@ class MainActivity : AppCompatActivity() {
         var weight = binding.edWeight.text.toString().toFloat()
         var height = binding.edHeight.text.toString().toFloat()
         var bmi = weight/(height*height)
-        Log.d("MainActivity", bmi.toString())
+
+        var state = check.checkRange(bmi)
+
+        val message = when(state) {
+            Check.checkState.UNDER -> getString(R.string.under)
+            Check.checkState.NORMAL -> getString(R.string.normal)
+            else -> getString(R.string.over)
+        }
         Toast.makeText(this, "Your BMI$bmi", Toast.LENGTH_LONG).show()
 //        val builder = AlertDialog.Builder(this)
 //        builder.setTitle("Hello")
@@ -38,6 +45,6 @@ class MainActivity : AppCompatActivity() {
             .setMessage("Your BMI is $bmi")
             .setPositiveButton("OK",null)
 //            .show()
-        binding.tvResult.text = ("Your Bmi : ${bmi} , ${check.checkRange(bmi)}")
+        binding.tvResult.text = ("Your Bmi : ${bmi} , $message")
     }
 }
