@@ -1,5 +1,7 @@
 package com.vangood.bmi2
 
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -43,8 +45,14 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Hello")
             .setMessage("Your BMI is $bmi")
-            .setPositiveButton("OK",null)
-//            .show()
+            .setPositiveButton("OK") { dialog, which ->
+                binding.edWeight.setText("")
+                binding.edHeight.setText("")
+            }
+            .show()
         binding.tvResult.text = ("Your Bmi : ${bmi} , $message")
+        val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra("BMI_Extra", bmi)
+        startActivity(intent)
     }
 }
