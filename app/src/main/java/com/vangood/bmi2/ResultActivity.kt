@@ -17,7 +17,7 @@ class ResultActivity : AppCompatActivity() {
         binding.bDone.setOnClickListener {
             val name = binding.edName.text.toString()
             val data = Intent()
-            data.putExtra("Name",name)
+            data.putExtra(Extras.NAME,name)
             setResult(RESULT_OK, data)
             finish()
         }
@@ -25,7 +25,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun showBmi() {
-        val bmi = intent.getFloatExtra("BMI_Extra", 0f)
+        val bmi = intent.getFloatExtra(Extras.BMI, 0f)
         Log.d(TAG, "BMI: $bmi ")
         binding.bmiDisplay.text = bmi.toString()
 

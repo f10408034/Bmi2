@@ -78,13 +78,14 @@ class MainActivity : AppCompatActivity() {
     class NameContract: ActivityResultContract<Float, String>(){
 
         override fun createIntent(context: Context, input: Float?): Intent {
-            var intent = Intent(context, ResultActivity::class.java).putExtra("BMI_Extra",input )
+            var intent = Intent(context, ResultActivity::class.java)
+                .putExtra(Extras.BMI, input )
             return intent
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?): String {
             if (resultCode == RESULT_OK){
-                val name = intent!!.getStringExtra("Name")
+                val name = intent!!.getStringExtra(Extras.NAME)
                 return name!!
             } else {
                 return "No name"
