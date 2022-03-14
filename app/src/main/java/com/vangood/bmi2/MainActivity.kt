@@ -36,9 +36,7 @@ class MainActivity : AppCompatActivity() {
         var weight = binding.edWeight.text.toString().toFloat()
         var height = binding.edHeight.text.toString().toFloat()
         var bmi = weight/(height*height)
-
         var state = check.checkRange(bmi)
-
         val message = when(state) {
             Check.checkState.UNDER -> getString(R.string.under)
             Check.checkState.NORMAL -> getString(R.string.normal)
@@ -55,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             .setTitle("Hello")
             .setMessage("Your BMI is $bmi")
             .setPositiveButton("OK") { dialog, which ->
+                //點擊ok後清空edit
                 binding.edWeight.setText("")
                 binding.edHeight.setText("")
             }
@@ -67,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         launcher.launch(bmi)
     }
 
+
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //        Log.d(TAG, "onActivityResult: ")
@@ -75,14 +75,13 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
-    class NameContract: ActivityResultContract<Float, String>(){
 
+    class NameContract: ActivityResultContract<Float, String>(){
         override fun createIntent(context: Context, input: Float?): Intent {
             var intent = Intent(context, ResultActivity::class.java)
                 .putExtra(Extras.BMI, input )
             return intent
         }
-
         override fun parseResult(resultCode: Int, intent: Intent?): String {
             if (resultCode == RESULT_OK){
                 val name = intent!!.getStringExtra(Extras.NAME)
